@@ -1,12 +1,16 @@
 <?php
-// Step 1: Create the Settings Page
-function interesttracker_settings_page() {
-    // Add a menu item under Settings
+// Step 1: Create the Settings Page Markup
+function interesttracker_settings_page_markup() {
+    include(plugin_dir_path(__FILE__) . '../public/views/setting-page.php');
+}
+
+// Step 2: Add Settings Page Action
+function interesttracker_settings_page_action() {
     add_options_page('Interest Tracker Settings', 'Interest Tracker', 'manage_options', 'interesttracker-settings', 'interesttracker_settings_page_markup');
 }
-add_action('admin_menu', 'interesttracker_settings_page');
+add_action('admin_menu', 'interesttracker_settings_page_action');
 
-// Step 2: Define the Settings
+// Step 3: Define the Settings
 function interesttracker_register_settings() {
     // Register settings
     register_setting('interesttracker_settings_group', 'interesttracker_api_key', 'sanitize_callback');
@@ -14,43 +18,14 @@ function interesttracker_register_settings() {
 }
 add_action('admin_init', 'interesttracker_register_settings');
 
-// Step 4: Create the Settings Page Markup
-function interesttracker_settings_page_markup() {
-    ?>
-    <div class="wrap">
-        <h1>Interest Tracker Settings</h1>
-        <form method="post" action="options.php">
-            <?php
-            // Output security fields for the registered setting 'interesttracker_settings_group'
-            settings_fields('interesttracker_settings_group');
-
-            // Get saved options
-            $api_key = get_option('interesttracker_api_key');
-            $api_endpoint = get_option('interesttracker_api_endpoint');
-            ?>
-
-            <table class="form-table">
-                <tr valign="top">
-                    <th scope="row">API KEY</th>
-                    <td><input type="text" name="interesttracker_api_key" value="<?php echo esc_attr($api_key); ?>" /></td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row">API ENDPOINT</th>
-                    <td><input type="text" name="interesttracker_api_endpoint" value="<?php echo esc_attr($api_endpoint); ?>" /></td>
-                </tr>
-            </table>
-
-            <?php
-            // Submit button
-            submit_button('Save Settings');
-            ?>
-        </form>
-    </div>
-    <?php
-}
-
-// Step 5: Save Settings
+// Step 4: Save Settings
 function sanitize_callback($input) {
     // Sanitize and validate input before saving
     return sanitize_text_field($input);
 }
+
+// Step 5: Enqueue Bootstrap CSS
+function interesttracker_enqueue_admin_styles() {
+    wp_enqueue_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css');
+}
+add_action('admin_enqueue_scripts', 'interesttracker_enqueue_admin_styles');

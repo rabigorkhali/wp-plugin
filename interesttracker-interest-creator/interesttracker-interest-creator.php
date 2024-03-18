@@ -1,15 +1,14 @@
 <?php
-/*
-Plugin Name: Interest Tracker Interest Creator
-Plugin URI: https://example.com/interest-tracker
-Description: A plugin to track user interests and create custom recommendations.
-Version: 1.0
-Author: Your Name
-Author URI: https://example.com
-License: GPL v2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: interest-tracker
-*/
+/**
+* Plugin Name: SermonView Interest Creator
+* Plugin URI: https://interesttracker.org/
+* Description: The theme of this epoch is a WordPress plug-in for InterestTracker which is an add-on to Gravity forms, which will allow form responses to flow into InterestTracker.
+* Version: 0.1
+* Author: sermon-view
+* Author URI: https://www.rabigorkhali.com.np
+**/
+
+
 
 // Activation hook
 register_activation_hook(__FILE__, 'interesttracker_activation_hook');
