@@ -10,19 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Update Plugin Version
         run: |
           # Get the current plugin version
-          CURRENT_VERSION=$(grep -oP "(?<=Version: )(\d+\.\d+\.\d+)" /interessttracker-wp-integrator.php)
+          CURRENT_VERSION=$(grep -oP "(?<=Version: )(\d+\.\d+\.\d+)" interesttracker-wp-integrator.php)
 
           # Increment the version number (assuming semantic versioning)
           NEW_VERSION=$(echo $CURRENT_VERSION | awk -F. '{print $1"."$2"."$3+1}')
 
           # Update the plugin version in the main plugin file
-          sed -i "s/Version: $CURRENT_VERSION/Version: $NEW_VERSION/" /interessttracker-wp-integrator.php
+          sed -i "s/Version: $CURRENT_VERSION/Version: $NEW_VERSION/" interesttracker-wp-integrator.php
 
           # Commit the changes
-          git add .
+          git add interesttracker-wp-integrator.php
           git commit -m "Update plugin version to $NEW_VERSION"
           git push origin rabi-if1-i1
         env:
