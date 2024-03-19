@@ -3,7 +3,7 @@ name: Update Check
 on:
   push:
     branches:
-      - rabi-if1-i1  # Change this to your main branch name
+      - rabi-if1-i1
 
 jobs:
   update-check:
@@ -35,6 +35,6 @@ jobs:
           # Commit the changes
           git add ../../interessttracker-wp-integrator.php
           git commit -m "Update plugin version to $NEW_VERSION"
-          git push origin main
+          git push origin rabi-if1-i1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
