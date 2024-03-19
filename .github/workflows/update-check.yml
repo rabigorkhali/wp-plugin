@@ -1,0 +1,40 @@
+name: Update Check
+
+on:
+  push:
+    branches:
+      - rabi-if1-i1  # Change this to your main branch name
+
+jobs:
+  update-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+
+      - name: Install Composer dependencies
+        run: composer install
+
+      - name: Update Plugin Version
+        run: |
+          # Get the current plugin version
+          CURRENT_VERSION=$(grep -oP "(?<=Version: )(\d+\.\d+\.\d+)" ../../interessttracker-wp-integrator.php)
+
+          # Increment the version number (assuming semantic versioning)
+          NEW_VERSION=$(echo $CURRENT_VERSION | awk -F. '{print $1"."$2"."$3+1}')
+
+          # Update the plugin version in the main plugin file
+          sed -i "s/Version: $CURRENT_VERSION/Version: $NEW_VERSION/" ../../interessttracker-wp-integrator.php
+
+          # Commit the changes
+          git add ../../interessttracker-wp-integrator.php
+          git commit -m "Update plugin version to $NEW_VERSION"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
