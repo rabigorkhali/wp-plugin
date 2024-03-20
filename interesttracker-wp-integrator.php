@@ -21,7 +21,7 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 );
 
 /* Set the branch that contains the stable release.*/
-$myUpdateChecker->setBranch('main');
+$myUpdateChecker->setBranch('rabi-if1-i1');
 /* Optional: If you're using a private repository, specify the access token like this:*/
 $myUpdateChecker->setAuthentication('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');
 /* PLUGIN UPDATE CHECK */
