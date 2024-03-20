@@ -16,7 +16,7 @@ jobs:
       - name: Update Plugin Version
         run: |
           # Get the current plugin version
-          CURRENT_VERSION=$(grep -oP "(?<=Version: )(\d+\.\d+\.\d+)" interesttracker-wp-integrator-rabi.php)
+          CURRENT_VERSION=$(grep -o "Version: [0-9]\+\.[0-9]\+\.[0-9]\+" interesttracker-wp-integrator-rabi.php | awk '{print $2}')
 
           # Increment the version number (assuming semantic versioning)
           NEW_VERSION=$(echo $CURRENT_VERSION | awk -F. '{print $1"."$2"."$3+1}')
