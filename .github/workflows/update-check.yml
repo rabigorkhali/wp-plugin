@@ -13,6 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set up Git identity
+        run: |
+          git config --global user.email "rabigorkhaly@gmail.com"
+          git config --global user.name "Github!@#1"
+
       - name: Update Plugin Version
         run: |
           # Get the current plugin version
