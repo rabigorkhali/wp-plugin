@@ -1,38 +1,25 @@
-name: Update Check
+name: Create Release
 
 on:
   push:
     branches:
-      - main
-
+      - main  # Change this to your main branch name
 
 jobs:
-  update-check:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Git identity
-        run: |
-          git config --global user.email "rabigorkhaly@gmail.com"
-          git config --global user.name "Github!@#1"
-
-      - name: Update Plugin Version
-        run: |
-          # Get the current plugin version
-          CURRENT_VERSION=$(grep -o "Version: [0-9]\+\.[0-9]\+\.[0-9]\+" interesttracker-wp-integrator-rabi.php | awk '{print $2}')
-
-          # Increment the version number (assuming semantic versioning)
-          NEW_VERSION=$(echo $CURRENT_VERSION | awk -F. '{print $1"."$2"."$3+1}')
-
-          # Update the plugin version in the main plugin file
-          sed -i "s/Version: $CURRENT_VERSION/Version: $NEW_VERSION/" interesttracker-wp-integrator-rabi.php
-
-          # Commit the changes using the GitHub token for authentication
-          git add interesttracker-wp-integrator-rabi.php
-          git commit -m "Update plugin version to $NEW_VERSION"
-          git push origin main
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.MY_SECRET_KEY }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+          draft: false
+          prerelease: false
