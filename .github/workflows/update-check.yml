@@ -17,7 +17,7 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_ACTION_TOKEN }}  # Update this line with your new token name
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Update this line with your new token name
         with:
           tag_name: v${{ github.run_number }}
           release_name: Release v${{ github.run_number }}
