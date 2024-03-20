@@ -29,9 +29,9 @@ jobs:
           # Update the plugin version in the main plugin file
           sed -i "s/Version: $CURRENT_VERSION/Version: $NEW_VERSION/" interesttracker-wp-integrator-rabi.php
 
-          # Commit the changes
+          # Commit the changes using the GitHub token for authentication
           git add interesttracker-wp-integrator-rabi.php
           git commit -m "Update plugin version to $NEW_VERSION"
           git push origin main
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_SECRET_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
