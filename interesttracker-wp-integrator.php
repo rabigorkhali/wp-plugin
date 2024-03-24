@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Plugin Name: SermonView Interest Creator Test
+ * Plugin Name: SermonView Interest Creator
  * Plugin URI: https://interesttracker.org/
  * Description: The theme of this epoch is a WordPress plug-in for InterestTracker which is an add-on to Gravity forms, which will allow form responses to flow into InterestTracker.
- * Version: 0.5
+ * Version: 1.0
  * Author: sermon-view
  * Author URI: https://www.rabigorkhali.com.np
  **/
 
 /* PLUGIN UPDATE CHECK */
-require 'plugin-update-checker/plugin-update-checker.php';
+require 'third-party-library//plugin-update-checker/plugin-update-checker.php';
 
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
