@@ -24,7 +24,7 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 $myUpdateChecker->setBranch('main');
 /* Optional: If you're using a private repository, specify the access token like this:*/
 /* if your repo is public comment this line else error will occur. */
-$myUpdateChecker->setAuthentication('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');
+$myUpdateChecker->setAuthentication('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');
 /* PLUGIN UPDATE CHECK */
 
 // Activation hook
